@@ -60,13 +60,13 @@ export default function Menu({ items }: { items: MenuItem[] }) {
                 className="group flex flex-col rounded-3xl border border-white/10 bg-ink/60 p-5 backdrop-blur-sm transition hover:border-gold/40 hover:shadow-[0_20px_60px_rgba(228,87,46,0.18)]"
               >
                 <div className="relative mb-5 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-ember/20 via-char to-ink">
-                  {item.image ? (
+                  {item.image || item.photo ? (
                     <Image
-                      src={urlFor(item.image as never).width(600).url()}
+                      src={item.image ? urlFor(item.image as never).width(600).url() : (item.photo as string)}
                       alt={item.name}
                       fill
                       sizes="(max-width: 640px) 90vw, 360px"
-                      className="object-contain p-4 transition duration-500 group-hover:scale-110"
+                      className={`transition duration-500 group-hover:scale-110 ${item.image ? 'object-contain p-4' : 'object-cover'}`}
                     />
                   ) : (
                     <span className="text-7xl transition duration-500 group-hover:scale-110">{item.emoji ?? '🍔'}</span>

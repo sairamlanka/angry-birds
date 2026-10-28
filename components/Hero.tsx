@@ -22,9 +22,10 @@ export default function Hero({ featured }: Props) {
   const ry = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), { stiffness: 120, damping: 14 });
 
   const imageSrc = useMemo(() => {
-    if (!featured?.image) return null;
-    return urlFor(featured.image as never).width(900).url();
+    if (featured?.image) return urlFor(featured.image as never).width(900).url();
+    return featured?.photo ?? null;
   }, [featured]);
+  const isCutout = Boolean(featured?.image);
 
   function handleMove(e: MouseEvent<HTMLDivElement>) {
     const r = e.currentTarget.getBoundingClientRect();
@@ -101,7 +102,11 @@ export default function Hero({ featured }: Props) {
                   fill
                   priority
                   sizes="(max-width: 768px) 85vw, 460px"
-                  className="object-contain drop-shadow-[0_30px_60px_rgba(228,87,46,0.35)]"
+                  className={
+                    isCutout
+                      ? 'object-contain drop-shadow-[0_30px_60px_rgba(228,87,46,0.35)]'
+                      : 'rounded-[2rem] border border-white/10 object-cover shadow-[0_30px_60px_rgba(228,87,46,0.35)]'
+                  }
                 />
               ) : (
                 <div className="flex h-full items-center justify-center text-[10rem] drop-shadow-[0_30px_60px_rgba(228,87,46,0.35)]">
