@@ -12,6 +12,7 @@ export type MenuItem = {
   isFeatured?: boolean;
   image?: unknown; // Sanity image object (preferred)
   photo?: string; // direct image URL, used by demo data
+  emoji?: string; // fallback when there is no image
 };
 
 export const CATEGORIES: { value: Category | 'all'; label: string }[] = [
