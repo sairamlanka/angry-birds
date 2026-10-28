@@ -5,6 +5,8 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useMemo, type MouseEvent } from 'react';
 import { urlFor } from '@/lib/sanity/image';
 import type { MenuItem } from '@/lib/menu';
+import { HERO_LAYERS } from '@/lib/hero';
+import BurgerStack from './BurgerStack';
 
 type Props = { featured?: MenuItem };
 
@@ -95,7 +97,9 @@ export default function Hero({ featured }: Props) {
               transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
               className="h-full w-full animate-drift"
             >
-              {imageSrc ? (
+              {HERO_LAYERS.length >= 2 ? (
+                <BurgerStack layers={HERO_LAYERS} alt={featured?.name ?? 'Featured burger'} />
+              ) : imageSrc ? (
                 <Image
                   src={imageSrc}
                   alt={featured?.name ?? 'Featured burger'}

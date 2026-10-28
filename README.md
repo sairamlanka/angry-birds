@@ -57,3 +57,13 @@ sanity.config.ts      Studio configuration
 - Prices are in ₹ (INR). Change the currency symbol in `components/Menu.tsx` and `components/Hero.tsx` if needed.
 - The cart is client-side only. Adding real checkout or payments (Razorpay, Stripe) is the next step.
 - Respects `prefers-reduced-motion`. Layout is mobile-first and tested by breakpoint in Tailwind.
+
+## Hero burger layers (split animation)
+
+The hero burger animates by splitting into layers. To enable it:
+
+1. Export transparent PNGs of each layer, all the same size and aligned: bottom bun, patty, cheese, tomato, lettuce, top bun.
+2. Put them in `public/hero/`.
+3. List them in `lib/hero.ts`, bottom to top, in `HERO_LAYERS`.
+
+With no layers listed, the hero shows the featured photo instead.
